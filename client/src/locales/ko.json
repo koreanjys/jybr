@@ -1,0 +1,25 @@
+{
+  "title": "JyBr - 당신의 뇌 리포트",
+  "subtitle": "다양한 테스트로 당신의 마음과 뇌를 탐험해보세요",
+  "categories": {
+    "personality": {
+      "title": "성향 테스트",
+      "emoji": "🧠",
+      "description": "당신의 성격과 성향을 알아보세요"
+    },
+    "horror": {
+      "title": "공포 테스트", 
+      "emoji": "👻",
+      "description": "무서운 이야기와 공포 체험"
+    },
+    "intelligence": {
+      "title": "지능 테스트",
+      "emoji": "🎯", 
+      "description": "논리력과 지능을 측정해보세요"
+    }
+  },
+  "language": {
+    "korean": "한국어",
+    "english": "English"
+  }
+}
