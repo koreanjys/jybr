@@ -1,25 +1,36 @@
 {
-  "title": "JyBr - Your Brain Report",
-  "subtitle": "Explore your mind and brain through various tests",
-  "categories": {
-    "personality": {
-      "title": "Personality Tests",
-      "emoji": "🧠",
-      "description": "Discover your personality and traits"
-    },
-    "horror": {
-      "title": "Horror Tests", 
-      "emoji": "👻",
-      "description": "Scary stories and horror experiences"
-    },
-    "intelligence": {
-      "title": "Intelligence Tests",
-      "emoji": "🎯", 
-      "description": "Measure your logic and intelligence"
-    }
+  "common": {
+    "language": "Language"
   },
-  "language": {
-    "korean": "한국어",
-    "english": "English"
+  "home": {
+    "title": "JyBr - Just Your Brain Report",
+    "subtitle": "Explore your mind and brain through various tests ✨",
+    "categories": {
+      "personality": {
+        "title": "Personality Tests",
+        "description": "Deeply analyze your personality and behavioral patterns",
+        "tests": {
+          "personality_et": "Personality Type + EgenTeto test Comprehensive Test"
+        }
+      },
+      "horror": {
+        "title": "Horror Tests", 
+        "description": "Explore your inner self with spine-chilling horror tests",
+        "tests": {
+          "psychopath": "(Coming Soon) Psychopath Test"
+        }
+      },
+      "intelligence": {
+        "title": "Intelligence Tests",
+        "description": "Evaluate your logical thinking and problem-solving abilities",
+        "tests": {
+          "iq": "(Coming Soon) IQ Test"
+        }
+      }
+    },
+    "language": {
+      "korean": "한국어",
+      "english": "English"
+    }
   }
 }

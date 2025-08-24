@@ -1,42 +1,35 @@
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/components/language-switcher';
+
 function HomePage() {
+  const { t } = useTranslation();
+
   const testCategories = [
     {
-      title: "성향 테스트",
-      emoji: "🧠",
+      title: t('home.categories.personality.title'),
+      emoji: "💭",
       color: "#8b5cf6",
-      description: "나의 성격과 행동 패턴을 깊이 있게 분석해보세요",
+      description: t('home.categories.personality.description'),
       tests: [
-        { name: "MBTI 성격유형 검사", url: "https://www.16personalities.com/ko" },
-        { name: "에니어그램 검사", url: "https://www.eclecticenergies.com/korean/enneagram/test" },
-        { name: "빅파이브 성격검사", url: "https://www.truity.com/test/big-five-personality-test" },
-        { name: "DISC 성향검사", url: "https://www.123test.com/ko/disc-personality-test/" },
-        { name: "홀랜드 진로적성검사", url: "https://www.career.go.kr/cnet/front/base/job/jobMain.do" }
+        { name: t('home.categories.personality.tests.personality_et'), url: "https://personality-et.jybr.me" },
       ]
     },
     {
-      title: "공포 테스트",
+      title: t('home.categories.horror.title'),
       emoji: "👻", 
       color: "#ec4899",
-      description: "당신의 공포 내성과 스릴 선호도를 측정해보세요",
+      description: t('home.categories.horror.description'),
       tests: [
-        { name: "공포 영화 취향 테스트", url: "https://www.buzzfeed.com/kr/hannahmarder/horror-movie-personality-test" },
-        { name: "무서운 이야기 테스트", url: "https://uquiz.com/quiz/horror-tolerance" },
-        { name: "스릴 추구 성향 검사", url: "https://www.psytoolkit.org/survey-library/sensation-seeking-zuckerman.html" },
-        { name: "공포 내성 측정", url: "https://www.allthetests.com/quiz33/quiz/1234567890/How-brave-are-you" },
-        { name: "어둠 공포증 테스트", url: "https://www.fearof.net/fear-of-darkness-test/" }
+        { name: t('home.categories.horror.tests.psychopath'), url: "#" },
       ]
     },
     {
-      title: "지능 테스트",
+      title: t('home.categories.intelligence.title'),
       emoji: "🎯",
       color: "#3b82f6", 
-      description: "논리적 사고력과 문제 해결 능력을 평가해보세요",
+      description: t('home.categories.intelligence.description'),
       tests: [
-        { name: "IQ 테스트", url: "https://www.iqtest.com/ko/" },
-        { name: "논리적 사고력 검사", url: "https://www.123test.com/ko/logical-reasoning-test/" },
-        { name: "수학적 추론 능력", url: "https://www.mathpapa.com/algebra-calculator/" },
-        { name: "공간지각능력 테스트", url: "https://www.123test.com/spatial-reasoning-test/" },
-        { name: "언어능력 검사", url: "https://www.vocabulary.com/test/" }
+        { name: t('home.categories.intelligence.tests.iq'), url: "#" },
       ]
     }
   ];
@@ -48,6 +41,7 @@ function HomePage() {
       padding: '2rem',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
+      <LanguageSwitcher />
       <div style={{ textAlign: 'center' }}>
         <h1 style={{ 
           fontSize: 'clamp(2.5rem, 8vw, 5rem)', 
@@ -60,7 +54,7 @@ function HomePage() {
           marginBottom: '1rem',
           lineHeight: '1.1'
         }}>
-          JyBr - Just Your Brain Report
+          {t('home.title')}
         </h1>
         <p style={{ 
           fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
@@ -68,7 +62,7 @@ function HomePage() {
           maxWidth: '42rem', 
           margin: '0 auto 3rem auto'
         }}>
-          다양한 테스트로 당신의 마음과 뇌를 탐험해보세요 ✨
+          {t('home.subtitle')}
         </p>
         
         <div style={{ 
