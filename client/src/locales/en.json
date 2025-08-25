@@ -21,21 +21,21 @@
     "categories": {
       "personality": {
         "title": "Personality Tests",
-        "description": "Deeply analyze your personality and behavioral patterns",
+        "description": "Comprehensively analyze personality types and hormonal tendencies (estrogen/testosterone) to deeply explore your true personality and behavioral patterns. Provides a scientific approach to understanding individual characteristics from multiple angles.",
         "tests": {
-          "personality_et": "Personality Type + EgenTeto test Comprehensive Test"
+          "personality_et": "Personality Type + EgenTeto Comprehensive Test"
         }
       },
       "horror": {
         "title": "Horror Tests", 
-        "description": "Explore your inner self with spine-chilling horror tests",
+        "description": "Analyze your deep psychological state and unconscious patterns through reactions to psychological horror elements and thriller situations. Discover your hidden self through exciting scenarios.",
         "tests": {
           "psychopath": "(Coming Soon) Psychopath Test"
         }
       },
       "intelligence": {
         "title": "Intelligence Tests",
-        "description": "Evaluate your logical thinking and problem-solving abilities",
+        "description": "Systematically evaluate logical thinking, pattern recognition, and problem-solving abilities to measure cognitive capabilities across various domains. Confirm intellectual capacity through objective and scientific methods.",
         "tests": {
           "iq": "(Coming Soon) IQ Test"
         }

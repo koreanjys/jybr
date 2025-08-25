@@ -61,90 +61,28 @@ function HomePage() {
           fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
           color: '#6b7280', 
           maxWidth: '42rem', 
-          margin: '0 auto 2rem auto'
+          margin: '0 auto 3rem auto'
         }}>
           {t('home.subtitle')}
         </p>
-
-        {/* 애드센스용 콘텐츠 섹션 추가 */}
-        <div style={{
-          maxWidth: '50rem',
-          margin: '0 auto 3rem auto',
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          borderRadius: '1rem',
-          padding: '2rem',
-          boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
-          textAlign: 'left'
-        }}>
-          <h2 style={{
-            fontSize: '1.5rem',
-            fontWeight: 'bold',
-            color: '#374151',
-            marginBottom: '1rem',
-            textAlign: 'center'
-          }}>
-            {t('home.about.title')}
-          </h2>
-          <div style={{
-            color: '#6b7280',
-            lineHeight: '1.8',
-            fontSize: '1rem'
-          }}>
-            <p style={{ marginBottom: '1rem' }}>
-              {t('home.about.description1')}
-            </p>
-            <p style={{ marginBottom: '1rem' }}>
-              {t('home.about.description2')}
-            </p>
-            <p style={{ marginBottom: '1rem' }}>
-              {t('home.about.description3')}
-            </p>
-          </div>
-          
-          <div style={{ 
-            marginTop: '2rem',
-            padding: '1.5rem',
-            backgroundColor: 'rgba(139, 92, 246, 0.1)',
-            borderRadius: '0.75rem',
-            borderLeft: '4px solid #8b5cf6'
-          }}>
-            <h3 style={{
-              fontSize: '1.2rem',
-              fontWeight: '600',
-              color: '#8b5cf6',
-              marginBottom: '0.75rem'
-            }}>
-              {t('home.features.title')}
-            </h3>
-            <ul style={{
-              color: '#6b7280',
-              lineHeight: '1.6',
-              paddingLeft: '1.5rem'
-            }}>
-              <li style={{ marginBottom: '0.5rem' }}>{t('home.features.feature1')}</li>
-              <li style={{ marginBottom: '0.5rem' }}>{t('home.features.feature2')}</li>
-              <li style={{ marginBottom: '0.5rem' }}>{t('home.features.feature3')}</li>
-              <li>{t('home.features.feature4')}</li>
-            </ul>
-          </div>
-        </div>
         
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-          gap: '2rem', 
-          maxWidth: '80rem', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
+          gap: '2.5rem', 
+          maxWidth: '85rem', 
           margin: '0 auto'
         }}>
           {testCategories.map((category, index) => (
             <div key={index} style={{ 
-              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              backgroundColor: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '1.5rem', 
-              padding: '2rem', 
+              padding: '2.5rem', 
               boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
               textAlign: 'left',
               border: '2px solid transparent',
-              transition: 'all 0.3s ease'
+              transition: 'all 0.3s ease',
+              minHeight: '400px'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-8px)';
@@ -166,7 +104,7 @@ function HomePage() {
                 }}>
                   {category.title}
                 </h3>
-                <p style={{ color: '#6b7280', lineHeight: '1.6', fontSize: '0.9rem' }}>
+                <p style={{ color: '#6b7280', lineHeight: '1.7', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
                   {category.description}
                 </p>
               </div>
@@ -188,26 +126,27 @@ function HomePage() {
                         rel="noopener noreferrer"
                         style={{
                           display: 'block',
-                          padding: '0.75rem 1rem',
-                          backgroundColor: `${category.color}10`,
+                          padding: '1rem 1.25rem',
+                          backgroundColor: category.color,
                           borderRadius: '0.75rem',
-                          color: category.color,
+                          color: 'white',
                           textDecoration: 'none',
-                          fontSize: '0.9rem',
-                          fontWeight: '500',
-                          transition: 'all 0.2s ease',
-                          border: `1px solid ${category.color}20`
+                          fontSize: '1rem',
+                          fontWeight: '600',
+                          transition: 'all 0.3s ease',
+                          textAlign: 'center',
+                          boxShadow: `0 4px 15px ${category.color}30`
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = `${category.color}20`;
-                          e.currentTarget.style.transform = 'translateX(4px)';
+                          e.currentTarget.style.transform = 'translateY(-3px)';
+                          e.currentTarget.style.boxShadow = `0 8px 25px ${category.color}40`;
                         }}
                         onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = `${category.color}10`;
-                          e.currentTarget.style.transform = 'translateX(0)';
+                          e.currentTarget.style.transform = 'translateY(0)';
+                          e.currentTarget.style.boxShadow = `0 4px 15px ${category.color}30`;
                         }}
                       >
-                        → {test.name}
+                        {test.name}
                       </a>
                     </li>
                   ))}

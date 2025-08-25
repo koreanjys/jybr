@@ -33,7 +33,7 @@ jybr/
 ### 🎯 효율적인 테스트 추가 방법
 
 #### 1. **서브도메인별 분류**
-- **성향 테스트**: personality-et.jybr.me, mbti.jybr.me 등
+- **성향 테스트**: personality-et.jybr.me, personality.jybr.me 등
 - **공포 테스트**: psychopath.jybr.me, horror.jybr.me 등  
 - **지능 테스트**: iq.jybr.me, logic.jybr.me 등
 
@@ -83,6 +83,7 @@ jybr/
 - 서버 관련 코드 추가
 - 불필요한 라이브러리 추가
 - 하드코딩된 값 사용
+- **MBTI라는 특정 성격 유형 분류 체계 언급 금지**
 - **서브도메인 간 종속성 생성**
 - **메인 허브 없이 접근 불가능한 구조**
 - **일관성 없는 디자인 시스템**
