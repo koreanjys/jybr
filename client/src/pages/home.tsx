@@ -180,11 +180,11 @@ function HomePage() {
                 transition: 'all 0.3s ease',
                 border: '1px solid rgba(139, 92, 246, 0.2)'
               }}
-              onMouseEnter={(e) => {
+              onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
                 e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.2)';
                 e.currentTarget.style.transform = 'translateY(-2px)';
               }}
-              onMouseLeave={(e) => {
+              onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
                 e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.1)';
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
