@@ -1,206 +1,218 @@
-# 정적 웹사이트 개발 가이드
+# JYBR 분산형 테스트 플랫폼 개발 가이드
 
-## 프로젝트 개요
-정적 웹사이트 개발을 위한 범용 가이드입니다. React 기반 모던 웹 개발의 모범 사례를 정리했습니다.
+## 시스템 개요
+JYBR은 메인 허브(jybr.me)를 중심으로 각 테스트를 독립적인 서브도메인으로 개발하는 분산형 심리 테스트 플랫폼입니다.
 
-## 권장 기술 스택
-- **Frontend Framework**: React 18.3+ with TypeScript 5.6+
-- **Build Tool**: Vite 5.4+
-- **Styling**: 인라인 CSS 또는 Tailwind CSS (번들 사이즈 고려)
-- **UI Components**: shadcn/ui (필요한 컴포넌트만 선별적 추가)
-- **Internationalization**: react-i18next (다국어 지원 시)
-- **Routing**: React Router 또는 wouter (SPA 필요 시)
-- **State Management**: React hooks 우선, 복잡한 경우 상태관리 라이브러리
-- **Deployment**: Cloudflare Pages, Vercel, Netlify
-
-## 표준 프로젝트 구조
+## 아키텍처 구조
 ```
-project-name/
-├── client/                     # 클라이언트 애플리케이션
-│   ├── src/
-│   │   ├── components/         # 재사용 가능한 UI 컴포넌트
-│   │   │   ├── ui/            # UI 라이브러리 컴포넌트
-│   │   │   ├── features/      # 기능별 컴포넌트
-│   │   │   └── common/        # 공통 컴포넌트
-│   │   ├── data/              # 정적 데이터 (JSON, TypeScript)
-│   │   ├── hooks/             # 커스텀 React hooks
-│   │   ├── lib/               # 유틸리티, 설정 파일
-│   │   ├── locales/           # 다국어 번역 파일 (선택)
-│   │   │   ├── ko.json        # 한국어 번역
-│   │   │   └── en.json        # 영어 번역
-│   │   ├── pages/             # 페이지 컴포넌트
-│   │   └── types/             # 타입 정의
-│   ├── public/                # 정적 파일
-│   │   ├── robots.txt        # SEO 크롤러 설정
-│   │   ├── sitemap.xml       # 사이트맵
-│   │   └── _headers          # 배포 플랫폼별 헤더 설정
-│   └── index.html            # 메인 HTML (SEO 메타태그 포함)
-├── docs/                      # 개발 참고 자료
-├── PROJECT_GUIDE.md           # 이 가이드 파일
-└── 설정 파일들
-    ├── package.json          # 의존성 관리
-    ├── tailwind.config.ts    # Tailwind 설정 (사용 시)
-    ├── vite.config.ts        # Vite 설정
-    └── tsconfig.json         # TypeScript 설정
+JYBR 플랫폼 구조:
+
+메인 허브 (jybr.me)
+├── 테스트 목록 관리
+├── 네비게이션
+└── 다국어 지원
+
+서브도메인 테스트들:
+├── personality-et.jybr.me (성격+호르몬 테스트)
+├── psychopath.jybr.me (사이코패스 테스트)
+├── iq.jybr.me (지능 테스트)
+└── [새로운 테스트].jybr.me
+
+연결 구조:
+메인 허브 ↔ 각 서브도메인 테스트
+- 허브에서 테스트 선택
+- 테스트 완료 후 허브로 복귀
+- 결과 공유 시 허브 링크 포함
 ```
 
-## 효율적인 기능 추가 전략
+## 표준 기술 스택
+- **Frontend**: React 18.3+ + TypeScript 5.6+ + Vite 5.4+
+- **Styling**: 인라인 CSS (일관된 디자인 시스템)
+- **UI Components**: shadcn/ui (필요한 컴포넌트만 선별)
+- **Internationalization**: react-i18next (한/영 필수)
+- **Deployment**: Cloudflare Pages (서브도메인별 자동 배포)
+- **Performance**: 60KB gzipped 목표
 
-### 🎯 모듈 기반 개발 방법
+## 서브도메인 테스트 프로젝트 구조
+```
+[테스트명].jybr.me/
+├── src/
+│   ├── components/
+│   │   ├── ui/              # shadcn/ui 컴포넌트
+│   │   ├── test/            # 테스트 전용 컴포넌트
+│   │   │   ├── Question.tsx # 질문 컴포넌트
+│   │   │   ├── Progress.tsx # 진행률 표시
+│   │   │   └── Result.tsx   # 결과 표시
+│   │   └── common/          # 공통 컴포넌트
+│   │       ├── Header.tsx   # 허브 복귀 링크 포함
+│   │       └── Footer.tsx   # 브랜딩 및 링크
+│   ├── data/               # 테스트 데이터
+│   │   ├── questions.ts    # 질문 데이터
+│   │   ├── scoring.ts      # 점수 계산 로직
+│   │   └── results.ts      # 결과 유형 정의
+│   ├── lib/
+│   │   ├── i18n.ts         # 다국어 설정
+│   │   ├── utils.ts        # 유틸리티 함수
+│   │   └── calculator.ts   # 결과 계산 엔진
+│   ├── locales/
+│   │   ├── ko.json         # 한국어 번역
+│   │   └── en.json         # 영어 번역
+│   ├── types/
+│   │   └── test.ts         # 테스트 관련 타입
+│   └── App.tsx             # 메인 애플리케이션
+├── public/
+│   ├── favicon.ico
+│   ├── robots.txt
+│   └── _headers            # Cloudflare Pages 설정
+├── package.json
+├── vite.config.ts
+└── tsconfig.json
+```
 
-#### 1. **표준화된 모듈 구조**
+## 새로운 테스트 개발 프로세스
+
+### 1단계: 테스트 기획
+1. **테스트 명세서 작성**
+   - 테스트 목적 및 대상
+   - 질문 구성 (권장: 20-40문항)
+   - 점수 체계 및 결과 유형
+   - 한영 번역 요구사항
+
+2. **서브도메인 설정**
+   - 도메인명 결정: `[테스트명].jybr.me`
+   - Cloudflare Pages 프로젝트 생성
+   - DNS 설정 및 SSL 인증서
+
+### 2단계: 프로젝트 초기화
+```bash
+# 1. React 프로젝트 생성
+npm create vite@latest [테스트명]-jybr -- --template react-ts
+cd [테스트명]-jybr
+
+# 2. 필수 패키지 설치
+npm install react-i18next i18next-browser-languagedetector
+
+# 3. UI 컴포넌트 (선택적)
+npx shadcn-ui@latest init
+npx shadcn-ui@latest add button card progress
+```
+
+### 3단계: 핵심 컴포넌트 개발
+1. **Question 컴포넌트**: 질문 표시 및 자동 진행
+2. **Progress 컴포넌트**: 시각적 진행률
+3. **Result 컴포넌트**: 결과 표시 및 공유
+4. **Header/Footer**: 허브 네비게이션
+
+### 4단계: 데이터 구조 정의
 ```typescript
-// src/data/[모듈명]/index.ts
-export interface ModuleConfig {
-  id: string;
-  category: string;
-  data: any[];
-  logic: Function[];
-  metadata: ModuleMetadata;
+// types/test.ts
+export interface Question {
+  id: number;
+  text: { ko: string; en: string };
+  options: { 
+    ko: string[]; 
+    en: string[]; 
+  };
+  scoring: Record<string, number>;
+}
+
+export interface TestResult {
+  type: string;
+  scores: Record<string, number>;
+  description: { ko: string; en: string };
 }
 ```
 
-#### 2. **3단계 추가 프로세스**
-1. **데이터 준비**: `src/data/[모듈명]/` 생성
-2. **번역 추가**: `locales/ko.json`, `locales/en.json` 업데이트 (다국어 시)
-3. **컴포넌트 연결**: `components/features/[모듈명]/` 생성
+## 개발 가이드라인
 
-#### 3. **재사용 컴포넌트 우선 활용**
-- `<Container>` - 공통 레이아웃
-- `<Card>` - 콘텐츠 카드
-- `<Button>` - 액션 버튼
-- `<Modal>` - 팝업 창
+### 성능 최적화
+- **번들 크기**: 60KB gzipped 목표
+- **lazy loading**: 결과 페이지는 필요시 로드
+- **이미지 최적화**: WebP 포맷, 적절한 사이징
+- **폰트**: 시스템 폰트 우선, 웹폰트 최소화
 
-#### 4. **자동화 고려사항**
-- 컴포넌트 템플릿 생성
-- 번역 파일 자동 업데이트
-- 라우팅 자동 설정
+### UX/UI 표준
+- **자동 진행**: 답변 선택 시 자동으로 다음 질문
+- **진행률 표시**: 시각적 프로그레스바
+- **반응형 디자인**: 모바일 우선 설계
+- **다국어**: 한국어/영어 자동 감지
 
-### 📋 새 기능 추가 체크리스트
-- [ ] 데이터 파일 생성 (`src/data/[기능명]/`)
-- [ ] 번역 파일 업데이트 (다국어 프로젝트)
-- [ ] 컴포넌트 생성 (`components/features/[기능명]/`)
-- [ ] 메인 페이지에 연결
-- [ ] 모바일 반응형 테스트
-- [ ] 번들 사이즈 확인
-- [ ] SEO 메타태그 업데이트
-
-## 주요 명령어
-```bash
-# 개발 서버 시작
-npm run dev
-
-# 프로덕션 빌드
-npm run build
-
-# 빌드 미리보기
-npm run preview
-
-# 타입 체킹
-npm run type-check
-
-# 린팅 (설정 시)
-npm run lint
-
-# Git 커밋 및 배포
-git add .
-git commit -m "description"
-git push  # 자동 배포 (Cloudflare Pages, Vercel 등)
-```
-
-## 의존성 관리
-```bash
-# 핵심 의존성 설치
-npm install
-
-# 새 UI 컴포넌트 추가 시 (필요한 경우만)
-npx shadcn-ui@latest add [component-name]
-
-# 다국어 지원 추가
-npm install react-i18next i18next i18next-browser-languagedetector
-```
-
-## 개발 규칙 및 모범 사례
-
-### ✅ 필수 사항
-- **모바일 우선 개발** (responsive design)
-- **TypeScript 타입 안정성** 확보
-- **컴포넌트 기반 모듈화**
-- **데이터와 UI 로직 분리**
-- **번들 사이즈 최적화** 유지
-- **표준화된 구조 준수**
-- **재사용 컴포넌트 우선 활용**
-- **접근성(A11y) 고려**
-
-### TypeScript/React 규칙
-- **Import 스타일**: 구조 분해 할당 우선 사용
-  ```typescript
-  // Good
-  import { useState, useEffect } from 'react'
-  import { Button, Card } from '@/components/ui'
-  ```
-
-- **컴포넌트 명명**: PascalCase 사용
-- **파일 명명**: kebab-case 사용 (my-component.tsx)
-- **타입 정의**: interface 우선 사용
-
-### 스타일링 규칙
-- **Tailwind CSS 사용 시**: mobile-first 접근
-- **인라인 CSS 사용 시**: CSS-in-JS 패턴 적용
-- **UI 컴포넌트**: 필요한 것만 선별적 추가
-- **반응형 디자인**: 모바일, 태블릿, 데스크톱 고려
-
-### 모바일 반응형 디자인 (중요!)
-- **텍스트 크기**: 제목 `text-xl md:text-2xl`, 본문 `text-sm md:text-base`
-- **터치 타겟**: 최소 44px 크기 확보
-- **가독성 우선**: 텍스트 잘림 방지
-- **패딩 최적화**: 모바일과 데스크톱 다르게 적용
-- **버튼 크기**: 모바일 터치 영역 고려
-
-### 다국어 지원 (선택사항)
-- **설정**: react-i18next 사용
-- **번역 키**: nested object 구조 (`t('section.key')`)
-- **번역 파일**: 구조 일치 필수
-- **언어 감지**: 브라우저 언어 자동 감지
-- **새 기능 추가 시**: 모든 언어 번역 필수
-
-```json
-// locales/ko.json 예시
-{
-  "common": {
-    "button": {
-      "start": "시작하기",
-      "cancel": "취소"
-    }
+### 코딩 표준
+```typescript
+// 인라인 CSS 예시
+const questionStyle = {
+  container: {
+    maxWidth: '600px',
+    margin: '0 auto',
+    padding: '20px',
+    minHeight: '100vh',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    justifyContent: 'center'
   },
-  "features": {
-    "featureName": {
-      "title": "기능 제목"
-    }
+  question: {
+    fontSize: '1.2rem',
+    fontWeight: '600',
+    marginBottom: '24px',
+    lineHeight: '1.6'
   }
-}
+};
 ```
 
-### ⚠️ 주의사항
-- 새 의존성 추가 전 검토 필수
-- UI 컴포넌트는 필요한 것만 선별적 추가
-- 모바일 반응형 테스트 필수
-- 번들 사이즈 모니터링 (100KB 미만 권장)
-- **다국어 프로젝트 시 번역 작업량 고려**
-- SEO 최적화 고려
+### 허브 연동
+- **헤더에 홈 링크**: jybr.me로 복귀
+- **푸터에 브랜딩**: "Powered by JYBR"
+- **메타데이터**: 소셜 공유 최적화
+- **결과 공유**: URL 기반 결과 공유
 
-### 🚨 금지사항
-- 서버 관련 코드 추가 (정적 배포만 사용)
-- 불필요한 라이브러리 추가
-- 하드코딩된 값 사용
-- 접근성 무시
-- **package.json 의존성 무분별한 추가**
+## 배포 및 운영
 
-## 성능 최적화
+### Cloudflare Pages 설정
+```javascript
+// _headers 파일
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cache-Control: public, max-age=31536000
+```
 
-### 번들 사이즈 관리
-- 필요한 라이브러리만 설치
-- Tree shaking 활용
+### SEO 최적화
+- **메타 태그**: 각 테스트별 맞춤 설정
+- **Open Graph**: 소셜 미디어 공유 최적화
+- **Sitemap**: 자동 생성 및 제출
+- **robots.txt**: 크롤링 정책
+
+### 품질 관리
+- **TypeScript**: 엄격 모드 활성화
+- **테스트**: 핵심 로직 단위 테스트
+- **접근성**: WCAG 2.1 AA 준수
+- **성능 모니터링**: Core Web Vitals 추적
+
+## 메인 허브 연동
+
+### 테스트 목록 업데이트
+새 테스트 추가 시 메인 허브(jybr.me)의 테스트 목록에 추가:
+```typescript
+// jybr.me/src/data/tests.ts
+export const tests = [
+  {
+    id: 'personality-et',
+    name: { ko: '성격+호르몬 성향 테스트', en: 'Personality+Hormone Test' },
+    url: 'https://personality-et.jybr.me',
+    description: { ko: '...', en: '...' }
+  },
+  // 새 테스트 추가
+];
+```
+
+### 분석 및 추적
+- **사용자 플로우**: 허브→테스트→결과→허브
+- **성과 지표**: 완료율, 공유율, 재방문률
+- **A/B 테스트**: 질문 순서, UI 개선
+
+이 가이드를 따라 JYBR 플랫폼의 새로운 심리 테스트들을 체계적으로 개발하고 운영할 수 있습니다.
+
 - Dynamic import 고려
 - 이미지 최적화
 
