@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import LanguageSwitcher from '@/components/language-switcher';
 
 function HomePage() {
@@ -60,10 +61,73 @@ function HomePage() {
           fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
           color: '#6b7280', 
           maxWidth: '42rem', 
-          margin: '0 auto 3rem auto'
+          margin: '0 auto 2rem auto'
         }}>
           {t('home.subtitle')}
         </p>
+
+        {/* 애드센스용 콘텐츠 섹션 추가 */}
+        <div style={{
+          maxWidth: '50rem',
+          margin: '0 auto 3rem auto',
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          borderRadius: '1rem',
+          padding: '2rem',
+          boxShadow: '0 4px 15px rgba(0,0,0,0.1)',
+          textAlign: 'left'
+        }}>
+          <h2 style={{
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            color: '#374151',
+            marginBottom: '1rem',
+            textAlign: 'center'
+          }}>
+            {t('home.about.title')}
+          </h2>
+          <div style={{
+            color: '#6b7280',
+            lineHeight: '1.8',
+            fontSize: '1rem'
+          }}>
+            <p style={{ marginBottom: '1rem' }}>
+              {t('home.about.description1')}
+            </p>
+            <p style={{ marginBottom: '1rem' }}>
+              {t('home.about.description2')}
+            </p>
+            <p style={{ marginBottom: '1rem' }}>
+              {t('home.about.description3')}
+            </p>
+          </div>
+          
+          <div style={{ 
+            marginTop: '2rem',
+            padding: '1.5rem',
+            backgroundColor: 'rgba(139, 92, 246, 0.1)',
+            borderRadius: '0.75rem',
+            borderLeft: '4px solid #8b5cf6'
+          }}>
+            <h3 style={{
+              fontSize: '1.2rem',
+              fontWeight: '600',
+              color: '#8b5cf6',
+              marginBottom: '0.75rem'
+            }}>
+              {t('home.features.title')}
+            </h3>
+            <ul style={{
+              color: '#6b7280',
+              lineHeight: '1.6',
+              paddingLeft: '1.5rem'
+            }}>
+              <li style={{ marginBottom: '0.5rem' }}>{t('home.features.feature1')}</li>
+              <li style={{ marginBottom: '0.5rem' }}>{t('home.features.feature2')}</li>
+              <li style={{ marginBottom: '0.5rem' }}>{t('home.features.feature3')}</li>
+              <li>{t('home.features.feature4')}</li>
+            </ul>
+          </div>
+        </div>
         
         <div style={{ 
           display: 'grid', 
@@ -151,6 +215,57 @@ function HomePage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* 하단 네비게이션 및 추가 정보 */}
+        <div style={{
+          marginTop: '4rem',
+          textAlign: 'center'
+        }}>
+          <div style={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '2rem',
+            marginBottom: '2rem',
+            flexWrap: 'wrap'
+          }}>
+            <Link 
+              to="/about"
+              style={{
+                padding: '0.75rem 1.5rem',
+                backgroundColor: 'rgba(139, 92, 246, 0.1)',
+                color: '#8b5cf6',
+                textDecoration: 'none',
+                borderRadius: '0.75rem',
+                fontWeight: '500',
+                transition: 'all 0.3s ease',
+                border: '1px solid rgba(139, 92, 246, 0.2)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.2)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.1)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              {t('home.navigation.about')}
+            </Link>
+          </div>
+          
+          <div style={{
+            color: '#9ca3af',
+            fontSize: '0.875rem',
+            lineHeight: '1.6'
+          }}>
+            <p style={{ marginBottom: '0.5rem' }}>
+              {t('home.footer.copyright')}
+            </p>
+            <p>
+              {t('home.footer.description')}
+            </p>
+          </div>
         </div>
       </div>
     </div>
