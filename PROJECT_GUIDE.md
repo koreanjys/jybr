@@ -1,55 +1,89 @@
-# 웹 프로젝트 개발 가이드
+# 정적 웹사이트 개발 가이드
 
 ## 프로젝트 개요
-웹 애플리케이션 개발을 위한 표준 문서입니다.
+정적 웹사이트 개발을 위한 범용 가이드입니다. React 기반 모던 웹 개발의 모범 사례를 정리했습니다.
 
-## 기술 스택
-- **Frontend Framework**: React 18.3 with TypeScript 5.6
-- **Build Tool**: Vite 5.4
-- **Styling**: Tailwind CSS 3.4 + tailwindcss-animate
-- **UI Components**: shadcn/ui (Radix UI primitives) - 최소한만 사용
-- **Internationalization**: react-i18next 15.6 (한국어/영어 필수)
-- **Routing**: wouter 3.3 (가벼운 라우터)
-- **State Management**: React hooks (useState, useEffect)
-- **Deployment**: Cloudflare Pages (정적 배포)
+## 권장 기술 스택
+- **Frontend Framework**: React 18.3+ with TypeScript 5.6+
+- **Build Tool**: Vite 5.4+
+- **Styling**: 인라인 CSS 또는 Tailwind CSS (번들 사이즈 고려)
+- **UI Components**: shadcn/ui (필요한 컴포넌트만 선별적 추가)
+- **Internationalization**: react-i18next (다국어 지원 시)
+- **Routing**: React Router 또는 wouter (SPA 필요 시)
+- **State Management**: React hooks 우선, 복잡한 경우 상태관리 라이브러리
+- **Deployment**: Cloudflare Pages, Vercel, Netlify
 
-## 프로젝트 구조
+## 표준 프로젝트 구조
 ```
-project/
+project-name/
 ├── client/                     # 클라이언트 애플리케이션
 │   ├── src/
 │   │   ├── components/         # 재사용 가능한 UI 컴포넌트
-│   │   │   ├── ui/            # 핵심 UI 컴포넌트
-│   │   │   │   ├── button.tsx
-│   │   │   │   ├── card.tsx
-│   │   │   │   ├── progress.tsx
-│   │   │   │   ├── toast.tsx
-│   │   │   │   ├── toaster.tsx
-│   │   │   │   └── tooltip.tsx
-│   │   │   ├── language-switcher.tsx  # 언어 전환 컴포넌트 (필수)
-│   │   │   └── (기타 컴포넌트들)
+│   │   │   ├── ui/            # UI 라이브러리 컴포넌트
+│   │   │   ├── features/      # 기능별 컴포넌트
+│   │   │   └── common/        # 공통 컴포넌트
+│   │   ├── data/              # 정적 데이터 (JSON, TypeScript)
 │   │   ├── hooks/             # 커스텀 React hooks
-│   │   ├── lib/               # 핵심 비즈니스 로직
-│   │   │   ├── i18n.ts        # 다국어 설정 (한국어/영어 필수)
-│   │   │   └── utils.ts       # 유틸리티 함수
-│   │   ├── locales/           # 다국어 번역 파일 (한국어/영어 필수)
+│   │   ├── lib/               # 유틸리티, 설정 파일
+│   │   ├── locales/           # 다국어 번역 파일 (선택)
 │   │   │   ├── ko.json        # 한국어 번역
 │   │   │   └── en.json        # 영어 번역
 │   │   ├── pages/             # 페이지 컴포넌트
-│   │   └── types/             # 타입 정의 (로컬)
-│   │       └── index.ts       # 프로젝트 타입 정의
+│   │   └── types/             # 타입 정의
 │   ├── public/                # 정적 파일
 │   │   ├── robots.txt        # SEO 크롤러 설정
 │   │   ├── sitemap.xml       # 사이트맵
-│   │   └── _headers          # Cloudflare Pages 헤더 설정
+│   │   └── _headers          # 배포 플랫폼별 헤더 설정
 │   └── index.html            # 메인 HTML (SEO 메타태그 포함)
-├── project_guide.md          # 프로젝트 가이드라인 (이 파일)
+├── docs/                      # 개발 참고 자료
+├── PROJECT_GUIDE.md           # 이 가이드 파일
 └── 설정 파일들
     ├── package.json          # 의존성 관리
-    ├── tailwind.config.ts    # Tailwind 설정
+    ├── tailwind.config.ts    # Tailwind 설정 (사용 시)
     ├── vite.config.ts        # Vite 설정
     └── tsconfig.json         # TypeScript 설정
 ```
+
+## 효율적인 기능 추가 전략
+
+### 🎯 모듈 기반 개발 방법
+
+#### 1. **표준화된 모듈 구조**
+```typescript
+// src/data/[모듈명]/index.ts
+export interface ModuleConfig {
+  id: string;
+  category: string;
+  data: any[];
+  logic: Function[];
+  metadata: ModuleMetadata;
+}
+```
+
+#### 2. **3단계 추가 프로세스**
+1. **데이터 준비**: `src/data/[모듈명]/` 생성
+2. **번역 추가**: `locales/ko.json`, `locales/en.json` 업데이트 (다국어 시)
+3. **컴포넌트 연결**: `components/features/[모듈명]/` 생성
+
+#### 3. **재사용 컴포넌트 우선 활용**
+- `<Container>` - 공통 레이아웃
+- `<Card>` - 콘텐츠 카드
+- `<Button>` - 액션 버튼
+- `<Modal>` - 팝업 창
+
+#### 4. **자동화 고려사항**
+- 컴포넌트 템플릿 생성
+- 번역 파일 자동 업데이트
+- 라우팅 자동 설정
+
+### 📋 새 기능 추가 체크리스트
+- [ ] 데이터 파일 생성 (`src/data/[기능명]/`)
+- [ ] 번역 파일 업데이트 (다국어 프로젝트)
+- [ ] 컴포넌트 생성 (`components/features/[기능명]/`)
+- [ ] 메인 페이지에 연결
+- [ ] 모바일 반응형 테스트
+- [ ] 번들 사이즈 확인
+- [ ] SEO 메타태그 업데이트
 
 ## 주요 명령어
 ```bash
@@ -71,7 +105,7 @@ npm run lint
 # Git 커밋 및 배포
 git add .
 git commit -m "description"
-git push  # Cloudflare Pages 자동 배포
+git push  # 자동 배포 (Cloudflare Pages, Vercel 등)
 ```
 
 ## 의존성 관리
@@ -81,9 +115,22 @@ npm install
 
 # 새 UI 컴포넌트 추가 시 (필요한 경우만)
 npx shadcn-ui@latest add [component-name]
+
+# 다국어 지원 추가
+npm install react-i18next i18next i18next-browser-languagedetector
 ```
 
-## 코드 스타일 및 규칙
+## 개발 규칙 및 모범 사례
+
+### ✅ 필수 사항
+- **모바일 우선 개발** (responsive design)
+- **TypeScript 타입 안정성** 확보
+- **컴포넌트 기반 모듈화**
+- **데이터와 UI 로직 분리**
+- **번들 사이즈 최적화** 유지
+- **표준화된 구조 준수**
+- **재사용 컴포넌트 우선 활용**
+- **접근성(A11y) 고려**
 
 ### TypeScript/React 규칙
 - **Import 스타일**: 구조 분해 할당 우선 사용
@@ -95,55 +142,85 @@ npx shadcn-ui@latest add [component-name]
 
 - **컴포넌트 명명**: PascalCase 사용
 - **파일 명명**: kebab-case 사용 (my-component.tsx)
-- **타입 정의**: `@/types` 사용, interface 우선
+- **타입 정의**: interface 우선 사용
 
-### Tailwind CSS 규칙 (정리됨)
-- **클래스 순서**: layout → spacing → typography → colors → effects
-- **반응형**: mobile-first 접근 (md:, lg: 등)
-- **플러그인**: tailwindcss-animate만 사용 (typography 제거됨)
-- **커스텀 컴포넌트**: 6개 핵심 shadcn/ui 컴포넌트만 사용
+### 스타일링 규칙
+- **Tailwind CSS 사용 시**: mobile-first 접근
+- **인라인 CSS 사용 시**: CSS-in-JS 패턴 적용
+- **UI 컴포넌트**: 필요한 것만 선별적 추가
+- **반응형 디자인**: 모바일, 태블릿, 데스크톱 고려
 
-### UI 컴포넌트 사용 규칙
-**✅ 사용 가능한 컴포넌트 (6개만)**
-- `Button`: 모든 버튼 요소
-- `Card`: 카드 레이아웃
-- `Progress`: 진행 표시
-- `Toast`: 알림 메시지
-- `Toaster`: Toast 컨테이너
-- `Tooltip`: 툴팁
+### 모바일 반응형 디자인 (중요!)
+- **텍스트 크기**: 제목 `text-xl md:text-2xl`, 본문 `text-sm md:text-base`
+- **터치 타겟**: 최소 44px 크기 확보
+- **가독성 우선**: 텍스트 잘림 방지
+- **패딩 최적화**: 모바일과 데스크톱 다르게 적용
+- **버튼 크기**: 모바일 터치 영역 고려
 
-### 모바일 반응형 디자인 규칙 (중요!)
-- **텍스트 크기 균형**: 제목 `text-xl md:text-2xl`, 본문 `text-sm md:text-base`
-- **자연스러운 줄바꿈**: `break-words`, `hyphens-auto`, `whitespace-normal` 사용
-- **가독성 우선**: 텍스트 잘림 방지, 완전한 내용 표시를 위한 줄바꿈 허용
-- **패딩 최적화**: 모바일 `p-3`, 데스크톱 `md:p-6`
-- **컨테이너 안전성**: `overflow-hidden` 제거하여 내용 표시 우선
-- **Flex 레이아웃**: `flex-1 min-w-0`로 텍스트 영역 최적화
-- **버튼 크기**: 모바일 터치 영역 고려한 적절한 크기
+### 다국어 지원 (선택사항)
+- **설정**: react-i18next 사용
+- **번역 키**: nested object 구조 (`t('section.key')`)
+- **번역 파일**: 구조 일치 필수
+- **언어 감지**: 브라우저 언어 자동 감지
+- **새 기능 추가 시**: 모든 언어 번역 필수
 
-### 다국어 처리 (한국어/영어 필수)
-- **번역 키**: nested object 구조 사용 (`t('section.key')`)
-- **번역 파일**: ko.json과 en.json 구조 일치 필수
-- **기본 언어**: 한국어 (ko)
-- **폴백 언어**: 영어 (en)
-- **언어 전환기**: 우상단 Globe 아이콘으로 한/영 전환 가능
+```json
+// locales/ko.json 예시
+{
+  "common": {
+    "button": {
+      "start": "시작하기",
+      "cancel": "취소"
+    }
+  },
+  "features": {
+    "featureName": {
+      "title": "기능 제목"
+    }
+  }
+}
+```
 
-## 필수 파일 및 구조
+### ⚠️ 주의사항
+- 새 의존성 추가 전 검토 필수
+- UI 컴포넌트는 필요한 것만 선별적 추가
+- 모바일 반응형 테스트 필수
+- 번들 사이즈 모니터링 (100KB 미만 권장)
+- **다국어 프로젝트 시 번역 작업량 고려**
+- SEO 최적화 고려
 
-### 핵심 파일
-- **`src/lib/utils.ts`**: 공통 유틸리티 함수
-- **`src/lib/i18n.ts`**: 다국어 설정 및 초기화 (한국어/영어 필수)
-- **`src/types/index.ts`**: 프로젝트 타입 정의 (로컬)
-- **`src/locales/ko.json`**: 한국어 번역 (필수)
-- **`src/locales/en.json`**: 영어 번역 (필수)
+### 🚨 금지사항
+- 서버 관련 코드 추가 (정적 배포만 사용)
+- 불필요한 라이브러리 추가
+- 하드코딩된 값 사용
+- 접근성 무시
+- **package.json 의존성 무분별한 추가**
 
-### 주요 컴포넌트
-- **`Pages`**: 주요 페이지 컴포넌트들
-- **`Components`**: 재사용 가능한 UI 컴포넌트
-- **`Hooks`**: 커스텀 React hooks
+## 성능 최적화
 
-### 타입 정의 예시
+### 번들 사이즈 관리
+- 필요한 라이브러리만 설치
+- Tree shaking 활용
+- Dynamic import 고려
+- 이미지 최적화
+
+### SEO 최적화
+```html
+<!-- public/index.html 예시 -->
+<meta name="description" content="프로젝트 설명">
+<meta property="og:title" content="프로젝트 제목">
+<meta property="og:description" content="프로젝트 설명">
+<meta property="og:image" content="/og-image.jpg">
+```
+
+### 필수 SEO 파일들
+- `robots.txt` - 크롤러 접근 설정
+- `sitemap.xml` - 페이지 구조
+- `_headers` - 보안 헤더 (Cloudflare Pages 등)
+
+## 타입 정의 예시
 ```typescript
+// src/types/index.ts
 export interface CommonProps {
   id: string;
   title: string;
@@ -157,14 +234,21 @@ export interface ComponentState {
 }
 ```
 
-### SEO 관련 파일
-- **`client/index.html`**: 메타태그, Open Graph 설정
-- **`client/public/sitemap.xml`**: 사이트맵
-- **`client/public/robots.txt`**: 크롤러 접근 설정
+## 배포 및 운영
+
+### 자동 배포 설정
+- Git push 시 자동 배포 (Cloudflare Pages, Vercel, Netlify)
+- 환경별 빌드 설정
+- 배포 전 테스트 자동화
+
+### 모니터링
+- 번들 사이즈 추적
+- 성능 지표 모니터링 (Core Web Vitals)
+- 사용자 피드백 수집
 
 ## Git 관리
 
-### 브랜치 명명
+### 브랜치 전략
 - `main`: 프로덕션 브랜치
 - `feature/description`: 새 기능 개발
 - `fix/description`: 버그 수정
@@ -175,66 +259,55 @@ export interface ComponentState {
 Type: Brief description
 
 Examples:
-- Add: New personality test questions
+- Add: New feature implementation
 - Fix: Mobile responsive issues
-- Update: Result calculation logic
-- Improve: User experience flow
+- Update: Content or configuration
+- Improve: User experience enhancement
 ```
 
-## 개발 규칙
+## 프로젝트 템플릿
 
-### ✅ 권장사항
-- 컴포넌트 분리 시 재사용성 고려
-- 모바일 우선 개발 (mobile-first)
-- 타입 안정성 확보
-- 성능 최적화 고려
-- 새 기능 추가 전 기존 코드 패턴 따르기
-- **의존성 추가 시 bundle size 고려**
-- **불필요한 shadcn/ui 컴포넌트 추가 금지**
+### 새 프로젝트 시작하기
+1. **기술 스택 선택** (React + TypeScript + Vite)
+2. **프로젝트 구조 설정** (표준 구조 적용)
+3. **기본 컴포넌트 준비** (UI 라이브러리 설치)
+4. **배포 환경 설정** (Cloudflare Pages 등)
+5. **SEO 기본 설정** (메타태그, sitemap)
 
-### ⚠️ 주의사항
-- 핵심 로직 변경 시 기존 호환성 고려
-- 새로운 의존성 추가 전 검토
-- 모바일 반응형 테스트 필수
-- SEO 최적화 고려
-- **UI 변경 시 모바일 반응형 테스트 필수** (텍스트 오버플로우 체크)
-- **새 의존성 추가 전 반드시 검토** (현재 최적화된 상태)
-- **다국어 수정 시 한국어/영어 버전 모두 동기화 필수**
-- **긴 텍스트 콘텐츠 작성 시 모바일 줄바꿈 고려**
+### 확장 가능한 구조 설계
+- 모듈별 독립적 개발 가능
+- 새로운 기능 쉽게 추가
+- 팀원 간 협업 용이
+- 유지보수성 향상
 
-### 🚨 금지사항
-- 핵심 계산 로직 무분별한 수정
-- 불필요한 외부 라이브러리 추가
-- 하드코딩된 값 사용
-- 접근성 무시
-- **현재 6개 UI 컴포넌트 삭제 금지**
-- **새 컴포넌트 추가 시 반드시 필요성 검토**
-- **package.json 의존성 함부로 추가 금지**
-- **서버 관련 코드 추가 금지** (정적 배포만 사용)
+### 베스트 프랙티스
+- **컴포넌트 분리** 시 재사용성 고려
+- **모바일 우선** 개발 (mobile-first)
+- **타입 안정성** 확보
+- **성능 최적화** 고려
+- **접근성** 표준 준수
 
-## 배포 및 운영
+## 체크리스트
 
-### 배포 프로세스
-- `main` 브랜치에 push 시 Cloudflare Pages 자동 배포
-- 중요한 변경사항은 반드시 테스트 후 배포
+### 개발 완료 전 확인사항
+- [ ] 모바일 반응형 테스트
+- [ ] 다국어 번역 완료 (해당하는 경우)
+- [ ] 번들 사이즈 확인
+- [ ] SEO 메타태그 설정
+- [ ] 접근성 테스트
+- [ ] 성능 최적화 확인
 
-### SEO 최적화
-- 메타 태그 설정
-- sitemap.xml 업데이트
-- robots.txt 설정
-- Open Graph 태그 포함
-
-## 꼭 해야할것
-- 프로젝트 변경사항이 완료되고 git add 전에 claude.md도 업데이트 해주고 git add 하기
-- **한글/영문에 영향을 주는 수정사항이면 번역이 잘 작동하는지 확인하기 (필수)**
-- 새로운 텍스트 추가 시 ko.json과 en.json에 모두 번역 추가
-
-## 프로젝트 목표
-사용자 친화적인 웹 애플리케이션을 개발하여, 좋은 사용자 경험과 성능 최적화를 목표로 합니다.
+### 배포 전 확인사항
+- [ ] 프로덕션 빌드 테스트
+- [ ] 환경변수 설정
+- [ ] 도메인 설정
+- [ ] 보안 헤더 설정
+- [ ] 모니터링 도구 설정
 
 ---
 
-**메인 도메인**: jybr.me
-**jybr**: Just Your Brain Report → 오직 당신의 뇌, 마음을 해석하는 리포트
-**마지막 업데이트**: 2025.08.23
-**버전**: 1.0.0
+**이 가이드는 정적 웹사이트 개발의 모범 사례를 정리한 것입니다.**  
+**프로젝트 특성에 맞게 조정하여 사용하세요.**
+
+**마지막 업데이트**: 2025.08.25  
+**버전**: 2.0.0 (범용 가이드)
