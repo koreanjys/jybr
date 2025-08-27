@@ -30,7 +30,7 @@
         "title": "Horror Tests", 
         "description": "Analyze your deep psychological state and unconscious patterns through reactions to psychological horror elements and thriller situations. Discover your hidden self through exciting scenarios.",
         "tests": {
-          "psychopath": "(Coming Soon) Psychopath Test"
+          "psychopath": "Psychopath Test"
         }
       },
       "intelligence": {
@@ -99,7 +99,7 @@
       "warning": "⚠️ Warning: This test is for entertainment purposes and does not replace professional psychological evaluation.",
       "duration": "5-10",
       "questionCount": "5",
-      "comingSoon": "Psychopath test is coming soon."
+      "serviceReady": "Psychopath test is ready!"
     },
     "iq": {
       "title": "IQ Test",
