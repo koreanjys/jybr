@@ -28,7 +28,7 @@ function HomePage() {
       tests: [
         { 
           name: t('home.categories.horror.tests.psychopath'), 
-          url: "#",
+          url: "https://psychopath.jybr.me",
           aboutPath: "/about/psychopath"
         },
       ]

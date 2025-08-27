@@ -126,9 +126,12 @@ function AboutPsychopathPage() {
 
           {/* 테스트 시작 버튼 */}
           <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-            <button
-              onClick={() => alert(t('about.psychopath.comingSoon'))}
+            <a
+              href="https://psychopath.jybr.me"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
+                display: 'inline-block',
                 padding: '1.25rem 2.5rem',
                 backgroundColor: '#ec4899',
                 border: 'none',
@@ -136,6 +139,7 @@ function AboutPsychopathPage() {
                 color: 'white',
                 fontSize: 'clamp(1rem, 4vw, 1.2rem)',
                 fontWeight: '700',
+                textDecoration: 'none',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 boxShadow: '0 8px 25px rgba(236, 72, 153, 0.3)'
@@ -150,7 +154,7 @@ function AboutPsychopathPage() {
               }}
             >
               {t('about.common.startTest')} →
-            </button>
+            </a>
           </div>
         </div>
       </div>
