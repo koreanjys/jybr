@@ -49,5 +49,78 @@
       "korean": "한국어",
       "english": "English"
     }
+  },
+  "about": {
+    "common": {
+      "backToHome": "Back to Home",
+      "startTest": "Start Test",
+      "testDuration": "Test Duration",
+      "questionCount": "Number of Questions",
+      "minutes": "minutes",
+      "questions": "questions",
+      "testOverview": "Test Overview",
+      "testFeatures": "Test Features",
+      "testMethod": "Test Method",
+      "measuredAreas": "Measured Areas"
+    },
+    "personalityET": {
+      "title": "Personality Type + EgenTeto Comprehensive Test",
+      "overview": "Comprehensively analyze personality types and hormonal tendencies (estrogen/testosterone) to deeply explore your true personality and behavioral patterns. Provides a scientific approach to understanding individual characteristics from multiple angles.",
+      "features": [
+        "Comprehensive evaluation combining personality type analysis and estrogen/testosterone tendencies",
+        "Reliable results based on scientific evidence",
+        "Understanding individual behavioral patterns and thinking styles",
+        "Analysis of characteristics in interpersonal relationships and decision-making"
+      ],
+      "methods": [
+        "Answer personality type questions honestly",
+        "Respond to hormonal tendency-related questions",
+        "Review detailed analysis combining both results",
+        "Receive personalized advice and improvement plans"
+      ],
+      "duration": "5-10",
+      "questionCount": "10"
+    },
+    "psychopath": {
+      "title": "Psychopath Tendency Test",
+      "overview": "A test to measure psychopathic tendencies based on psychological research. This test is created for entertainment purposes and does not replace medical diagnosis. Please use it as a tool to understand your personality characteristics.",
+      "areas": [
+        "Emotional callousness and empathy",
+        "Impulsivity and self-control",
+        "Manipulative tendencies in interpersonal relationships",
+        "Antisocial behavioral patterns"
+      ],
+      "methods": [
+        "Choose honest reactions to each situation",
+        "Prioritize immediate feelings over emotional reactions",
+        "Respond sincerely to all questions",
+        "Interpret results objectively"
+      ],
+      "warning": "⚠️ Warning: This test is for entertainment purposes and does not replace professional psychological evaluation.",
+      "duration": "5-10",
+      "questionCount": "5",
+      "comingSoon": "Psychopath test is coming soon."
+    },
+    "iq": {
+      "title": "IQ Test",
+      "overview": "An intelligence quotient test that comprehensively measures logical thinking, pattern recognition, and problem-solving abilities. Provides objective and reliable results through standardized questions and evaluates cognitive abilities across various domains in a balanced manner.",
+      "areas": [
+        "Verbal reasoning and comprehension",
+        "Mathematical logical thinking",
+        "Spatial perception and visual pattern recognition",
+        "Sequential reasoning and rule discovery",
+        "Working memory and information processing speed"
+      ],
+      "methods": [
+        "Concentrate and respond in a quiet environment",
+        "Do your best to solve problems within time limits",
+        "Prioritize logical approach over guessing",
+        "Complete all questions and check results"
+      ],
+      "tip": "💡 Tip: Trust your first instinct and don't overthink.",
+      "duration": "20-30",
+      "questionCount": "30",
+      "comingSoon": "IQ test is coming soon."
+    }
   }
 }

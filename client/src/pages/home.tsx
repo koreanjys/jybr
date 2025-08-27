@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import LanguageSwitcher from '@/components/language-switcher';
 
 function HomePage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const testCategories = [
     {
@@ -11,7 +13,11 @@ function HomePage() {
       color: "#8b5cf6",
       description: t('home.categories.personality.description'),
       tests: [
-        { name: t('home.categories.personality.tests.personality_et'), url: "https://personality-et.jybr.me" },
+        { 
+          name: t('home.categories.personality.tests.personality_et'), 
+          url: "https://personality-et.jybr.me",
+          aboutPath: "/about/personality-et"
+        },
       ]
     },
     {
@@ -20,7 +26,11 @@ function HomePage() {
       color: "#ec4899",
       description: t('home.categories.horror.description'),
       tests: [
-        { name: t('home.categories.horror.tests.psychopath'), url: "#" },
+        { 
+          name: t('home.categories.horror.tests.psychopath'), 
+          url: "#",
+          aboutPath: "/about/psychopath"
+        },
       ]
     },
     {
@@ -29,7 +39,11 @@ function HomePage() {
       color: "#3b82f6", 
       description: t('home.categories.intelligence.description'),
       tests: [
-        { name: t('home.categories.intelligence.tests.iq'), url: "#" },
+        { 
+          name: t('home.categories.intelligence.tests.iq'), 
+          url: "#",
+          aboutPath: "/about/iq"
+        },
       ]
     }
   ];
@@ -81,7 +95,7 @@ function HomePage() {
               textAlign: 'left',
               border: '2px solid transparent',
               transition: 'all 0.3s ease',
-              minHeight: '400px'
+              minHeight: '280px'
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.transform = 'translateY(-8px)';
@@ -103,9 +117,6 @@ function HomePage() {
                 }}>
                   {category.title}
                 </h3>
-                <p style={{ color: '#6b7280', lineHeight: '1.7', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-                  {category.description}
-                </p>
               </div>
               
               <div style={{ marginTop: '1.5rem' }}>
@@ -119,34 +130,72 @@ function HomePage() {
                 }}>
                   {category.tests.map((test, testIndex) => (
                     <li key={testIndex}>
-                      <a 
-                        href={test.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          display: 'block',
-                          padding: '1rem 1.25rem',
-                          backgroundColor: category.color,
-                          borderRadius: '0.75rem',
-                          color: 'white',
-                          textDecoration: 'none',
-                          fontSize: '1rem',
-                          fontWeight: '600',
-                          transition: 'all 0.3s ease',
-                          textAlign: 'center',
-                          boxShadow: `0 4px 15px ${category.color}30`
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.transform = 'translateY(-3px)';
-                          e.currentTarget.style.boxShadow = `0 8px 25px ${category.color}40`;
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.transform = 'translateY(0)';
-                          e.currentTarget.style.boxShadow = `0 4px 15px ${category.color}30`;
-                        }}
-                      >
-                        {test.name}
-                      </a>
+                      <div style={{
+                        display: 'flex',
+                        gap: '0.75rem',
+                        alignItems: 'stretch'
+                      }}>
+                        <a 
+                          href={test.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            flex: '1',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: '1rem 1.25rem',
+                            backgroundColor: category.color,
+                            borderRadius: '0.75rem',
+                            color: 'white',
+                            textDecoration: 'none',
+                            fontSize: '1rem',
+                            fontWeight: '600',
+                            transition: 'all 0.3s ease',
+                            textAlign: 'center',
+                            boxShadow: `0 4px 15px ${category.color}30`
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-3px)';
+                            e.currentTarget.style.boxShadow = `0 8px 25px ${category.color}40`;
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.boxShadow = `0 4px 15px ${category.color}30`;
+                          }}
+                        >
+                          {test.name}
+                        </a>
+                        <button
+                          onClick={() => {
+                            navigate(test.aboutPath);
+                          }}
+                          style={{
+                            padding: '1rem',
+                            backgroundColor: 'transparent',
+                            border: `2px solid ${category.color}`,
+                            borderRadius: '0.75rem',
+                            color: category.color,
+                            fontSize: '0.875rem',
+                            fontWeight: '600',
+                            cursor: 'pointer',
+                            transition: 'all 0.3s ease',
+                            whiteSpace: 'nowrap'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = category.color;
+                            e.currentTarget.style.color = 'white';
+                            e.currentTarget.style.transform = 'translateY(-3px)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.color = category.color;
+                            e.currentTarget.style.transform = 'translateY(0)';
+                          }}
+                        >
+                          About
+                        </button>
+                      </div>
                     </li>
                   ))}
                 </ul>
