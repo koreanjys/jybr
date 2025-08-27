@@ -5,7 +5,57 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- SEO 메타태그 (React에서 동적으로 업데이트됨) -->
+    <!-- 브라우저 언어 감지 스크립트 (메타데이터 업데이트 전에 실행) -->
+    <script>
+      (function() {
+        const browserLang = navigator.language.toLowerCase();
+        const isKorean = browserLang.startsWith('ko');
+        
+        // HTML lang 속성 즉시 업데이트
+        document.documentElement.lang = isKorean ? 'ko' : 'en';
+        
+        // 메타데이터 즉시 업데이트
+        if (!isKorean) {
+          // 영어 메타데이터로 즉시 변경
+          document.title = 'JYBR - Just Your Brain Report | Personality/Horror/Intelligence Tests';
+          
+          // 동적으로 메타태그 생성 및 업데이트
+          setTimeout(function() {
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+              metaDesc.content = 'Discover your mind and brain through specialized tests. Explore your deeper self with personality, horror, and intelligence tests.';
+            }
+            
+            const ogTitle = document.querySelector('meta[property="og:title"]');
+            if (ogTitle) {
+              ogTitle.content = 'JYBR - Just Your Brain Report';
+            }
+            
+            const ogDesc = document.querySelector('meta[property="og:description"]');
+            if (ogDesc) {
+              ogDesc.content = 'Discover your mind and brain through specialized tests';
+            }
+            
+            const ogLocale = document.querySelector('meta[property="og:locale"]');
+            if (ogLocale) {
+              ogLocale.content = 'en_US';
+            }
+            
+            const twitterTitle = document.querySelector('meta[property="twitter:title"]');
+            if (twitterTitle) {
+              twitterTitle.content = 'JYBR - Just Your Brain Report';
+            }
+            
+            const twitterDesc = document.querySelector('meta[property="twitter:description"]');
+            if (twitterDesc) {
+              twitterDesc.content = 'Discover your mind and brain through specialized tests';
+            }
+          }, 0);
+        }
+      })();
+    </script>
+    
+    <!-- SEO 메타태그 (기본: 한국어, 스크립트에서 동적 업데이트) -->
     <title>JYBR - Just Your Brain Report | 성향/공포/지능 테스트</title>
     <meta name="description" content="당신의 뇌와 마음을 해석하는 특별한 테스트들. 성향 테스트, 공포 테스트, 지능 테스트를 통해 자신을 더 깊이 이해해보세요." />
     <meta name="keywords" content="성향테스트, 공포테스트, 지능테스트, 심리테스트, 뇌분석, JYBR, personality test, horror test, intelligence test, psychology test, brain analysis" />
@@ -16,7 +66,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3464871693186950"
          crossorigin="anonymous"></script>
     
-    <!-- Open Graph / Facebook (React에서 동적으로 업데이트됨) -->
+    <!-- Open Graph / Facebook (스크립트에서 동적 업데이트) -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://jybr.me/" />
     <meta property="og:title" content="JYBR - Just Your Brain Report" />
@@ -26,7 +76,7 @@
     <meta property="og:locale" content="ko_KR" />
     <meta property="og:locale:alternate" content="en_US" />
     
-    <!-- Twitter (React에서 동적으로 업데이트됨) -->
+    <!-- Twitter (스크립트에서 동적 업데이트) -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="https://jybr.me/" />
     <meta property="twitter:title" content="JYBR - Just Your Brain Report" />

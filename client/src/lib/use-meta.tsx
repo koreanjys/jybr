@@ -51,14 +51,27 @@ export function useMeta() {
       twitterDescription.setAttribute('content', t('meta.twitterDescription'));
     }
 
-    // Canonical URL의 hreflang 업데이트
-    const alternateLinks = document.querySelectorAll('link[rel="alternate"]');
-    alternateLinks.forEach((link) => {
-      const hreflang = link.getAttribute('hreflang');
-      if (hreflang === i18n.language) {
-        link.setAttribute('href', window.location.origin + '/');
-      }
-    });
+    // 즉시 실행되는 언어 감지 및 메타데이터 업데이트
+    // 이것은 페이지 로드 직후 실행되어 크롤러가 읽을 가능성을 높입니다
+    setTimeout(() => {
+      // 추가 보장을 위한 재실행
+      document.title = t('meta.title');
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc) desc.setAttribute('content', t('meta.description'));
+    }, 0);
 
   }, [t, i18n.language]);
+
+  // 초기 로드 시 즉시 메타데이터 설정
+  useEffect(() => {
+    // 브라우저 언어 감지 후 즉시 메타데이터 업데이트
+    const browserLang = navigator.language.toLowerCase();
+    const isKorean = browserLang.startsWith('ko');
+    
+    if (isKorean && i18n.language !== 'ko') {
+      i18n.changeLanguage('ko');
+    } else if (!isKorean && i18n.language !== 'en') {
+      i18n.changeLanguage('en');
+    }
+  }, [i18n]);
 }
