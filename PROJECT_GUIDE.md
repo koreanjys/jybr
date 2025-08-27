@@ -136,27 +136,66 @@ export interface TestResult {
 - **진행률 표시**: 시각적 프로그레스바
 - **반응형 디자인**: 모바일 우선 설계
 - **다국어**: 한국어/영어 자동 감지
+- **모바일 최적화**: CSS clamp() 함수로 반응형 폰트 시스템
+
+### 모바일 최적화 가이드라인
+
+#### CSS clamp() 함수 활용
+```css
+/* 반응형 폰트 크기 패턴 */
+fontSize: 'clamp(최소크기, 선호크기, 최대크기)'
+
+/* 표준 크기 가이드 */
+- 메인 제목: clamp(2rem, 6vw, 4rem)
+- 서브 제목: clamp(1.5rem, 5vw, 2.5rem) 
+- 섹션 제목: clamp(1.2rem, 4vw, 1.5rem)
+- 본문 텍스트: clamp(0.9rem, 3vw, 1.1rem)
+- 작은 텍스트: clamp(0.85rem, 2.5vw, 0.95rem)
+```
+
+#### 반응형 패딩 및 간격
+```css
+/* 컨테이너 및 요소 간격 */
+- 컨테이너 패딩: clamp(1rem, 4vw, 2rem)
+- 카드 패딩: clamp(0.8rem, 3vw, 1rem)  
+- 버튼 패딩: clamp(1rem, 4vw, 1.25rem)
+```
+
+#### 모바일 우선 원칙
+1. **최소 크기**: 모바일 가독성 확보
+2. **최대 크기**: 데스크톱 적절한 크기 제한
+3. **유연한 스케일링**: viewport 기반 비례 조정
+4. **일관성**: 모든 텍스트 요소 통일된 체계
 
 ### 코딩 표준
 ```typescript
-// 인라인 CSS 예시
+// 반응형 인라인 CSS 예시 (모바일 최적화)
 const questionStyle = {
   container: {
     maxWidth: '600px',
     margin: '0 auto',
-    padding: '20px',
+    padding: 'clamp(1rem, 4vw, 2rem)', // 반응형 패딩
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column' as const,
     justifyContent: 'center'
   },
   question: {
-    fontSize: '1.2rem',
+    fontSize: 'clamp(1rem, 4vw, 1.2rem)', // 반응형 폰트
     fontWeight: '600',
     marginBottom: '24px',
     lineHeight: '1.6'
+  },
+  button: {
+    padding: 'clamp(0.8rem, 3vw, 1rem)', // 반응형 버튼 패딩
+    fontSize: 'clamp(0.9rem, 3vw, 1rem)'
   }
 };
+
+// clamp() 사용 시 주의사항
+// - 최소값: 모바일에서 읽기 편한 크기
+// - 중간값: viewport width 기반 (보통 3-6vw)
+// - 최대값: 데스크톱에서 적절한 크기
 ```
 
 ### 허브 연동
@@ -302,12 +341,13 @@ Examples:
 ## 체크리스트
 
 ### 개발 완료 전 확인사항
-- [ ] 모바일 반응형 테스트
+- [ ] 모바일 반응형 테스트 (CSS clamp() 적용 확인)
 - [ ] 다국어 번역 완료 (해당하는 경우)
 - [ ] 번들 사이즈 확인
 - [ ] SEO 메타태그 설정
 - [ ] 접근성 테스트
 - [ ] 성능 최적화 확인
+- [ ] 다양한 화면 크기에서 폰트 크기 테스트
 
 ### 배포 전 확인사항
 - [ ] 프로덕션 빌드 테스트
@@ -321,5 +361,5 @@ Examples:
 **이 가이드는 정적 웹사이트 개발의 모범 사례를 정리한 것입니다.**  
 **프로젝트 특성에 맞게 조정하여 사용하세요.**
 
-**마지막 업데이트**: 2025.08.25  
-**버전**: 2.0.0 (범용 가이드)
+**마지막 업데이트**: 2025.08.27 (모바일 최적화 가이드 추가)  
+**버전**: 2.1.0 (반응형 폰트 시스템)
