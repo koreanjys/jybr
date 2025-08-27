@@ -20,7 +20,7 @@ jybr/
 │   │   │   └── language-switcher.tsx # 언어 전환 컴포넌트
 │   │   ├── lib/               # i18n, utils
 │   │   ├── locales/           # ko.json, en.json (번역)
-│   │   ├── pages/home.tsx     # 메인 허브 페이지
+│   │   ├── pages/home.tsx     # 메인 허브 페이지 (단일 페이지)
 │   │   └── App.tsx
 │   ├── public/                # SEO 파일들
 │   └── package.json
@@ -101,8 +101,8 @@ git push            # 자동 배포
 - **메인 허브**: jybr.me (테스트 선택 및 네비게이션)
 - **서브도메인**: [테스트명].jybr.me (개별 테스트 실행)
 - **다국어**: 한/영 자동 감지 지원 ✅
-- **성능**: 60KB gzipped (메인 허브 기준)
+- **성능**: 80KB gzipped (메인 허브)
 - **배포**: Cloudflare Pages 자동 배포
 
 ---
-**마지막 업데이트**: 2025.08.25
+**마지막 업데이트**: 2025.08.27

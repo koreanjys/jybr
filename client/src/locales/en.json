@@ -41,9 +41,6 @@
         }
       }
     },
-    "navigation": {
-      "about": "About JYBR"
-    },
     "footer": {
       "copyright": "© 2025 JYBR - Just Your Brain Report. All rights reserved.",
       "description": "Understand yourself more deeply with scientific and reliable psychological analysis."
@@ -52,39 +49,5 @@
       "korean": "한국어",
       "english": "English"
     }
-  },
-  "about": {
-    "title": "About JYBR",
-    "subtitle": "Scientific and Reliable Psychological Analysis Platform",
-    "mission": {
-      "title": "Our Mission",
-      "description1": "JYBR aims to help individuals scientifically understand their psychological characteristics and cognitive patterns. We provide accurate and reliable tests based on research achievements in modern psychology and neuroscience.",
-      "description2": "We believe that self-understanding is the starting point for personal growth and happiness. Therefore, we support the journey of self-discovery through a psychological testing platform that anyone can easily access."
-    },
-    "approach": {
-      "title": "Our Approach",
-      "scientific": {
-        "title": "Scientific Evidence",
-        "description": "All tests are designed based on validated psychological theories and latest research results to provide reliable outcomes."
-      },
-      "privacy": {
-        "title": "Privacy Protection",
-        "description": "User personal information and test results are thoroughly protected, processed anonymously, and managed securely."
-      },
-      "accessibility": {
-        "title": "Accessibility",
-        "description": "We provide an intuitive interface that anyone can easily use by minimizing language and technical barriers."
-      },
-      "accuracy": {
-        "title": "Accuracy",
-        "description": "Through continuous research and improvement, we enhance test accuracy and provide useful insights."
-      }
-    },
-    "vision": {
-      "title": "Our Vision",
-      "description1": "JYBR believes that self-understanding through psychological tests can contribute to personal growth and social development. We will continue to develop new tests and improve existing ones to provide better services.",
-      "description2": "In the future, we aim to grow into a global platform that utilizes AI and machine learning technologies to provide more sophisticated and personalized analysis, helping users worldwide better understand themselves."
-    },
-    "backToHome": "Back to Home"
   }
 }

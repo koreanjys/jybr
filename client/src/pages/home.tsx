@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 import LanguageSwitcher from '@/components/language-switcher';
 
 function HomePage() {
@@ -156,43 +155,11 @@ function HomePage() {
           ))}
         </div>
 
-        {/* 하단 네비게이션 및 추가 정보 */}
+        {/* 하단 푸터 */}
         <div style={{
           marginTop: '4rem',
           textAlign: 'center'
         }}>
-          <div style={{
-            display: 'flex',
-            justifyContent: 'center',
-            gap: '2rem',
-            marginBottom: '2rem',
-            flexWrap: 'wrap'
-          }}>
-            <Link 
-              to="/about"
-              style={{
-                padding: '0.75rem 1.5rem',
-                backgroundColor: 'rgba(139, 92, 246, 0.1)',
-                color: '#8b5cf6',
-                textDecoration: 'none',
-                borderRadius: '0.75rem',
-                fontWeight: '500',
-                transition: 'all 0.3s ease',
-                border: '1px solid rgba(139, 92, 246, 0.2)'
-              }}
-              onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.2)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                e.currentTarget.style.backgroundColor = 'rgba(139, 92, 246, 0.1)';
-                e.currentTarget.style.transform = 'translateY(0)';
-              }}
-            >
-              {t('home.navigation.about')}
-            </Link>
-          </div>
-          
           <div style={{
             color: '#9ca3af',
             fontSize: '0.875rem',
