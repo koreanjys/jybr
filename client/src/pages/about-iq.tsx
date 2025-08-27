@@ -81,12 +81,12 @@ function AboutIQPage() {
             </ul>
 
                         <h2 style={{ color: '#3b82f6', fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', marginBottom: '1rem' }}>
-              {t('about.common.tips')}
+              {t('about.common.testMethod')}
             </h2>
             <div style={{ backgroundColor: '#f0f9ff', padding: 'clamp(0.8rem, 3vw, 1rem)', borderRadius: '8px', border: '1px solid #0ea5e9' }}>
-              {(t('about.iq.tips', { returnObjects: true }) as string[]).map((tip: string, index: number) => (
+              {(t('about.iq.methods', { returnObjects: true }) as string[]).map((method: string, index: number) => (
                 <div key={index} style={{ marginBottom: '0.8rem', fontSize: 'clamp(0.9rem, 3vw, 1rem)' }}>
-                  <strong>💡 </strong>{tip}
+                  <strong>💡 </strong>{method}
                 </div>
               ))}
             </div>
