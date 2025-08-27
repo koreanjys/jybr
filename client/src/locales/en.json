@@ -1,4 +1,13 @@
 {
+  "meta": {
+    "title": "JYBR - Just Your Brain Report | Personality/Horror/Intelligence Tests",
+    "description": "Discover your mind and brain through specialized tests. Explore your deeper self with personality, horror, and intelligence tests.",
+    "keywords": "personality test, horror test, intelligence test, psychology test, brain analysis, JYBR, 성향테스트, 공포테스트, 지능테스트, 심리테스트, 뇌분석",
+    "ogTitle": "JYBR - Just Your Brain Report",
+    "ogDescription": "Discover your mind and brain through specialized tests",
+    "twitterTitle": "JYBR - Just Your Brain Report", 
+    "twitterDescription": "Discover your mind and brain through specialized tests"
+  },
   "common": {
     "language": "Language"
   },

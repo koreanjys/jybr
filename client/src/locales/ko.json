@@ -1,4 +1,13 @@
 {
+  "meta": {
+    "title": "JYBR - Just Your Brain Report | 성향/공포/지능 테스트",
+    "description": "당신의 뇌와 마음을 해석하는 특별한 테스트들. 성향 테스트, 공포 테스트, 지능 테스트를 통해 자신을 더 깊이 이해해보세요.",
+    "keywords": "성향테스트, 공포테스트, 지능테스트, 심리테스트, 뇌분석, JYBR, personality test, horror test, intelligence test, psychology test, brain analysis",
+    "ogTitle": "JYBR - Just Your Brain Report",
+    "ogDescription": "당신의 뇌와 마음을 해석하는 특별한 테스트들",
+    "twitterTitle": "JYBR - Just Your Brain Report",
+    "twitterDescription": "당신의 뇌와 마음을 해석하는 특별한 테스트들"
+  },
   "common": {
     "language": "언어"
   },

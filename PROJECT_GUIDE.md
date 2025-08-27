@@ -123,6 +123,58 @@ export interface TestResult {
 }
 ```
 
+## 동적 메타데이터 시스템
+
+### 다국어 메타태그 자동 업데이트
+브라우저/OS 언어 설정에 따라 메타데이터가 자동으로 번역되어 SNS 공유 시 적절한 언어로 표시됩니다.
+
+```typescript
+// lib/use-meta.tsx
+export function useMeta() {
+  const { t, i18n } = useTranslation();
+  
+  useEffect(() => {
+    // 언어 변경 시 자동 업데이트되는 메타태그들
+    document.title = t('meta.title');
+    document.querySelector('meta[name="description"]')?.setAttribute('content', t('meta.description'));
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', t('meta.ogTitle'));
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', t('meta.ogDescription'));
+    document.querySelector('meta[property="twitter:title"]')?.setAttribute('content', t('meta.twitterTitle'));
+    document.querySelector('meta[property="twitter:description"]')?.setAttribute('content', t('meta.twitterDescription'));
+  }, [t, i18n.language]);
+}
+```
+
+### 메타데이터 번역 구조
+```json
+// locales/ko.json, locales/en.json
+{
+  "meta": {
+    "title": "언어별 페이지 제목",
+    "description": "언어별 페이지 설명",
+    "keywords": "언어별 키워드",
+    "ogTitle": "SNS 공유용 제목",
+    "ogDescription": "SNS 공유용 설명",
+    "twitterTitle": "트위터 공유용 제목", 
+    "twitterDescription": "트위터 공유용 설명"
+  }
+}
+```
+
+### 적용 방법
+1. **App.tsx에서 Hook 사용**
+```typescript
+import { useMeta } from './lib/use-meta';
+
+function App() {
+  useMeta(); // 언어 변경 시 메타데이터 자동 업데이트
+  return <Router>...</Router>;
+}
+```
+
+2. **번역 파일에 meta 섹션 추가**
+3. **index.html에 기본 메타태그 설정**
+
 ## 개발 가이드라인
 
 ### 성능 최적화
@@ -252,6 +304,55 @@ export const tests = [
 
 이 가이드를 따라 JYBR 플랫폼의 새로운 심리 테스트들을 체계적으로 개발하고 운영할 수 있습니다.
 
+## 배포 전 품질 검증 체크리스트
+
+### 🔍 기능 검증
+- [ ] **컴파일 에러 검사**: `npm run build` 성공 확인
+- [ ] **TypeScript 오류 검사**: 모든 파일에서 타입 에러 없음
+- [ ] **번들 크기 확인**: gzipped 60KB 목표 (최대 100KB 허용)
+- [ ] **개발 서버 정상 작동**: `npm run dev` 실행 후 브라우저 테스트
+
+### 📱 다국어 및 메타데이터 검증
+- [ ] **번역 키 완전성**: 모든 `t('key')` 사용에 대응하는 번역 존재
+- [ ] **메타데이터 번역**: meta.* 키들이 ko.json, en.json에 모두 존재
+- [ ] **언어 전환 테스트**: 언어 변경 시 메타태그 자동 업데이트 확인
+- [ ] **SNS 공유 미리보기**: 한/영 각각 적절한 제목/설명 표시
+
+### 🌐 링크 및 연결성 검증
+- [ ] **서브도메인 URL 유효성**: 모든 링크가 올바른 도메인 주소 사용
+- [ ] **About 페이지 연결**: 메인 허브 ↔ About 페이지 ↔ 실제 테스트 사이트 플로우
+- [ ] **네비게이션 정상 작동**: 뒤로가기, 홈 버튼 등 모든 링크 테스트
+- [ ] **외부 링크**: 새 탭에서 열리는지, target="_blank" 적용 확인
+
+### 📊 SEO 및 성능 검증
+- [ ] **sitemap.xml 업데이트**: 새 페이지/도메인 추가 시 사이트맵 반영
+- [ ] **robots.txt 확인**: 크롤링 정책 적절한지 검토
+- [ ] **Open Graph 태그**: Facebook, Twitter 등 SNS 공유 최적화
+- [ ] **모바일 반응형**: 다양한 화면 크기에서 레이아웃 테스트
+
+### 🎨 UI/UX 검증
+- [ ] **모바일 폰트 크기**: CSS clamp() 적용으로 적절한 크기 조정
+- [ ] **버튼 및 링크 크기**: 터치하기 쉬운 크기 (최소 44px)
+- [ ] **컬러 대비**: 접근성 기준 준수 (WCAG 2.1 AA)
+- [ ] **로딩 상태**: 사용자 피드백 적절히 제공
+
+### 🔄 Git 및 배포 검증
+- [ ] **변경사항 정리**: commit 메시지가 명확하고 구체적
+- [ ] **브랜치 상태**: main 브랜치가 최신 상태인지 확인
+- [ ] **환경변수**: 배포 환경에 필요한 설정 누락 없음
+- [ ] **빌드 설정**: vite.config.ts, package.json 적절한 설정
+
+### 📋 배포 후 확인사항
+- [ ] **실제 도메인 접속**: 배포된 사이트 정상 작동 확인
+- [ ] **HTTPS 인증서**: SSL 인증서 정상 적용
+- [ ] **CDN 캐싱**: Cloudflare Pages 캐시 적절히 작동
+- [ ] **성능 지표**: Lighthouse 점수 확인 (Performance, SEO, Accessibility)
+
+### ⚠️ 긴급 롤백 준비
+- [ ] **이전 버전 백업**: 문제 발생 시 즉시 롤백 가능한 상태
+- [ ] **모니터링 설정**: 에러 로그 및 성능 지표 모니터링
+- [ ] **사용자 피드백 채널**: 문제 신고 받을 수 있는 방법 준비
+
 - Dynamic import 고려
 - 이미지 최적화
 
@@ -361,5 +462,5 @@ Examples:
 **이 가이드는 정적 웹사이트 개발의 모범 사례를 정리한 것입니다.**  
 **프로젝트 특성에 맞게 조정하여 사용하세요.**
 
-**마지막 업데이트**: 2025.08.27 (모바일 최적화 가이드 추가)  
-**버전**: 2.1.0 (반응형 폰트 시스템)
+**마지막 업데이트**: 2025.08.28 (동적 메타데이터 시스템 및 배포 전 검증 체크리스트 추가)  
+**버전**: 2.2.0 (다국어 메타데이터 시스템)
