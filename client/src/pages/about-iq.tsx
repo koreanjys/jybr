@@ -9,7 +9,7 @@ function AboutIQPage() {
     <div style={{ 
       minHeight: '100vh', 
       background: 'linear-gradient(135deg, #fef7f0 0%, #fdf2f8 50%, #eff6ff 100%)',
-      padding: '2rem',
+      padding: 'clamp(1rem, 4vw, 2rem)',
       fontFamily: 'system-ui, -apple-system, sans-serif'
     }}>
       <LanguageSwitcher />
@@ -25,7 +25,7 @@ function AboutIQPage() {
             borderRadius: '0.75rem',
             color: '#3b82f6',
             textDecoration: 'none',
-            fontSize: '1rem',
+            fontSize: 'clamp(0.9rem, 3vw, 1rem)',
             fontWeight: '600',
             boxShadow: '0 4px 15px rgba(59, 130, 246, 0.2)',
             transition: 'all 0.3s ease',
@@ -47,14 +47,14 @@ function AboutIQPage() {
         <div style={{
           backgroundColor: 'rgba(255, 255, 255, 0.95)',
           borderRadius: '1.5rem',
-          padding: '3rem',
+          padding: 'clamp(2rem, 5vw, 3rem)',
           boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
           border: '2px solid #3b82f6'
         }}>
           <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>🎯</div>
+            <div style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', marginBottom: '1rem' }}>🎯</div>
             <h1 style={{
-              fontSize: '2.5rem',
+              fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
               fontWeight: 'bold',
               color: '#3b82f6',
               marginBottom: '1rem'
@@ -63,15 +63,15 @@ function AboutIQPage() {
             </h1>
           </div>
 
-          <div style={{ lineHeight: '1.8', color: '#374151', fontSize: '1.1rem' }}>
-            <h2 style={{ color: '#3b82f6', fontSize: '1.5rem', marginBottom: '1rem' }}>
+          <div style={{ lineHeight: '1.8', color: '#374151', fontSize: 'clamp(0.9rem, 3vw, 1.1rem)' }}>
+            <h2 style={{ color: '#3b82f6', fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', marginBottom: '1rem' }}>
               {t('about.common.testOverview')}
             </h2>
             <p style={{ marginBottom: '1.5rem' }}>
               {t('about.iq.overview')}
             </p>
 
-            <h2 style={{ color: '#3b82f6', fontSize: '1.5rem', marginBottom: '1rem' }}>
+            <h2 style={{ color: '#3b82f6', fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', marginBottom: '1rem' }}>
               {t('about.common.measuredAreas')}
             </h2>
             <ul style={{ marginBottom: '1.5rem', paddingLeft: '1.5rem' }}>
@@ -80,14 +80,16 @@ function AboutIQPage() {
               ))}
             </ul>
 
-            <h2 style={{ color: '#3b82f6', fontSize: '1.5rem', marginBottom: '1rem' }}>
-              {t('about.common.testMethod')}
+                        <h2 style={{ color: '#3b82f6', fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', marginBottom: '1rem' }}>
+              {t('about.common.tips')}
             </h2>
-            <ol style={{ marginBottom: '1.5rem', paddingLeft: '1.5rem' }}>
-              {(t('about.iq.methods', { returnObjects: true }) as string[]).map((method: string, index: number) => (
-                <li key={index} style={{ marginBottom: '0.5rem' }}>{method}</li>
+            <div style={{ backgroundColor: '#f0f9ff', padding: 'clamp(0.8rem, 3vw, 1rem)', borderRadius: '8px', border: '1px solid #0ea5e9' }}>
+              {(t('about.iq.tips', { returnObjects: true }) as string[]).map((tip: string, index: number) => (
+                <div key={index} style={{ marginBottom: '0.8rem', fontSize: 'clamp(0.9rem, 3vw, 1rem)' }}>
+                  <strong>💡 </strong>{tip}
+                </div>
               ))}
-            </ol>
+            </div>
 
             <div style={{
               backgroundColor: '#eff6ff',
@@ -98,7 +100,7 @@ function AboutIQPage() {
             }}>
               <p style={{ 
                 color: '#1e40af', 
-                fontSize: '0.95rem',
+                fontSize: 'clamp(0.85rem, 2.5vw, 0.95rem)',
                 textAlign: 'center',
                 margin: 0,
                 fontWeight: '600'
@@ -109,7 +111,7 @@ function AboutIQPage() {
 
             <div style={{
               backgroundColor: '#f3f4f6',
-              padding: '1.5rem',
+              padding: 'clamp(1rem, 4vw, 1.5rem)',
               borderRadius: '1rem',
               marginTop: '1rem'
             }}>
@@ -129,12 +131,12 @@ function AboutIQPage() {
             <button
               onClick={() => alert(t('about.iq.comingSoon'))}
               style={{
-                padding: '1.25rem 2.5rem',
+                padding: 'clamp(1rem, 4vw, 1.25rem) clamp(2rem, 6vw, 2.5rem)',
                 backgroundColor: '#3b82f6',
                 border: 'none',
                 borderRadius: '1rem',
                 color: 'white',
-                fontSize: '1.2rem',
+                fontSize: 'clamp(1rem, 4vw, 1.2rem)',
                 fontWeight: '700',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',

@@ -58,7 +58,7 @@ function HomePage() {
       <LanguageSwitcher />
       <div style={{ textAlign: 'center' }}>
         <h1 style={{ 
-          fontSize: 'clamp(2.5rem, 8vw, 5rem)', 
+          fontSize: 'clamp(2rem, 6vw, 4rem)', 
           fontWeight: 'bold',
           background: 'linear-gradient(45deg, #8b5cf6, #ec4899, #3b82f6)',
           WebkitBackgroundClip: 'text',
@@ -71,7 +71,7 @@ function HomePage() {
           {t('home.title')}
         </h1>
         <p style={{ 
-          fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
+          fontSize: 'clamp(0.9rem, 3vw, 1.1rem)', 
           color: '#6b7280', 
           maxWidth: '42rem', 
           margin: '0 auto 3rem auto'
@@ -81,8 +81,8 @@ function HomePage() {
         
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-          gap: '2.5rem', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+          gap: '2rem', 
           maxWidth: '85rem', 
           margin: '0 auto'
         }}>
@@ -90,7 +90,7 @@ function HomePage() {
             <div key={index} style={{ 
               backgroundColor: 'rgba(255, 255, 255, 0.95)',
               borderRadius: '1.5rem', 
-              padding: '2.5rem', 
+              padding: 'clamp(1.5rem, 4vw, 2.5rem)', 
               boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
               textAlign: 'left',
               border: '2px solid transparent',
@@ -108,9 +108,9 @@ function HomePage() {
               e.currentTarget.style.borderColor = 'transparent';
             }}>
               <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
-                <div style={{ fontSize: '4rem', marginBottom: '1rem' }}>{category.emoji}</div>
+                <div style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', marginBottom: '1rem' }}>{category.emoji}</div>
                 <h3 style={{ 
-                  fontSize: '1.5rem', 
+                  fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', 
                   fontWeight: 'bold', 
                   color: category.color, 
                   marginBottom: '0.75rem' 
