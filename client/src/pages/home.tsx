@@ -33,19 +33,19 @@ function HomePage() {
         },
       ]
     },
-    {
-      title: t('home.categories.intelligence.title'),
-      emoji: "🎯",
-      color: "#3b82f6", 
-      description: t('home.categories.intelligence.description'),
-      tests: [
-        { 
-          name: t('home.categories.intelligence.tests.iq'), 
-          url: "#",
-          aboutPath: "/about/iq"
-        },
-      ]
-    }
+    // {
+    //   title: t('home.categories.intelligence.title'),
+    //   emoji: "🎯",
+    //   color: "#3b82f6", 
+    //   description: t('home.categories.intelligence.description'),
+    //   tests: [
+    //     { 
+    //       name: t('home.categories.intelligence.tests.iq'), 
+    //       url: "#",
+    //       aboutPath: "/about/iq"
+    //     },
+    //   ]
+    // }
   ];
 
   return (
